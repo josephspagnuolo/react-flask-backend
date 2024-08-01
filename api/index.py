@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_cors import CORS
 import os
 
@@ -8,7 +8,9 @@ cors = CORS(app, origins='*')
 @app.route('/')
 def home():
     if os.getenv('TESTING'):
-        return os.getenv('TESTING')
+        return jsonify(
+            { "testing":  os.getenv('TESTING') }
+        )
     else:
         return 'Hello, World!'
 
