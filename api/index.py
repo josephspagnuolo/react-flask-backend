@@ -6,7 +6,7 @@ import os
 import pymysql
 
 app = Flask(__name__)
-cors = CORS(app, origins='*')
+cors = CORS(app, origins=[os.getenv('FRONTEND_URL')])
 
 supabase_url = os.getenv('SUPABASE_URL')
 supabase_key = os.getenv('SUPABASE_KEY')
