@@ -90,7 +90,6 @@ def home():
 @app.route('/edit', methods=['POST'])
 def edit():
     try:
-        file = request.form.get['file']
         file_name = request.form.get['fileName']
         first_name = request.form.get['firstName']
         last_name = request.form.get['lastName']
