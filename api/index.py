@@ -29,7 +29,6 @@ def doDB():
         cursor.execute("SELECT * FROM mytest")
         result = cursor.fetchall()
     finally:
-        cursor.close()
         connection.close()
     return result
 
