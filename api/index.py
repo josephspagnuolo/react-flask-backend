@@ -108,7 +108,8 @@ def edit():
         if file:
             supabase.storage.from_(bucket_name).remove([f'profile/{file_name}'])
             new_file_name = f'avatar{datetime.now().strftime("%Y%m%d%H%M%S")}.png'
-            supabase.storage.from_(bucket_name).upload(f'profile/{new_file_name}', file.stream, {
+            file_content = file.read()
+            supabase.storage.from_(bucket_name).upload(f'profile/{new_file_name}', file_content, {
                 'content-type': file.content_type
             })
             file_name = new_file_name
