@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from datetime import datetime
+from supabase import create_client, Client
 import os
 import pymysql
 
