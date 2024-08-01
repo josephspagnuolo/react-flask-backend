@@ -1,10 +1,16 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from datetime import datetime
 import os
 import pymysql
 
 app = Flask(__name__)
 cors = CORS(app, origins='*')
+
+supabase_url = os.getenv('SUPABASE_URL')
+supabase_key = os.getenv('SUPABASE_KEY')
+supabase: Client = create_client(supabase_url, supabase_key)
+bucket_name = 'fullstackdevassignment'
 
 def get_db_connection():
     return pymysql.connect(
@@ -90,12 +96,21 @@ def home():
 @app.route('/edit', methods=['POST'])
 def edit():
     try:
+        file = request.files.get('file')
         file_name = request.form.get('fileName')
         first_name = request.form.get('firstName')
         last_name = request.form.get('lastName')
         phone_number = request.form.get('phoneNumber')
         job_title = request.form.get('jobTitle')
         country = request.form.get('country')
+
+        if file:
+            supabase.storage.from_(bucket_name).remove([f'profile/{file_name}'])
+            new_file_name = f'avatar{datetime.now().strftime("%Y%m%d%H%M%S")}.png'
+            supabase.storage.from_(bucket_name).upload(f'profile/{new_file_name}', file.stream, {
+                'content-type': file.content_type
+            })
+            file_name = new_file_name
         
         result = insertDB(file_name, first_name, last_name, phone_number, job_title, country)
         return jsonify({"result": result})
