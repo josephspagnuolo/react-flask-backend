@@ -40,7 +40,7 @@ def home():
         return jsonify(
             {
                 "testing": {
-                    "env": testing_env,
+                    "env": os.getenv('TESTING'),
                     "db_result": result
                 }
             }
