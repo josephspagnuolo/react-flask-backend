@@ -49,7 +49,7 @@ def insertDB(file_name, first_name, last_name, phone_number, job_title, country)
     try:
         connection = get_db_connection()
         cursor = connection.cursor()
-        cursor.execute("DROP TABLE IF EXISTS pledgx")
+        cursor.execute("DROP TABLE IF EXISTS flask")
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS flask (
                 id INTEGER AUTO_INCREMENT PRIMARY KEY,
