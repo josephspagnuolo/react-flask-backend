@@ -90,13 +90,13 @@ def home():
 @app.route('/edit', methods=['POST'])
 def edit():
     try:
-        data = request.json
-        file_name = data.get('fileName')
-        first_name = data.get('firstName')
-        last_name = data.get('lastName')
-        phone_number = data.get('phoneNumber')
-        job_title = data.get('jobTitle')
-        country = data.get('country')
+        file = request.form['file']
+        file_name = request.form['fileName']
+        first_name = request.form['firstName']
+        last_name = request.form['lastName']
+        phone_number = request.form['phoneNumber']
+        job_title = request.form['jobTitle']
+        country = request.form['country']
         
         result = insertDB(file_name, first_name, last_name, phone_number, job_title, country)
         return jsonify({"result": result})
