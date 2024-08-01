@@ -4,7 +4,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return 'Hello, World!'
+    if os.getenv('TESTING'):
+        return os.getenv('TESTING')
+    else:
+        return 'Hello, World!'
 
 @app.route('/about')
 def about():
