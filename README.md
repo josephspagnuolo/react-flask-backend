@@ -1,3 +1,5 @@
-### Backend for Full Stack Developer Technical Assessment
+### Backend for Full Stack Developer Technical Assignment
 
-A simple flask app which handles API requests from the frontend, including a simple MySQL database and file storage for profile image.
+A simple Flask app which handles API requests from the frontend, including accessing a simple MySQL database which stores the contact information, and utilizing file storage to save the profile image.
+
+The backend alone is available here: [https://react-flask-backend.vercel.app/](https://react-flask-backend.vercel.app/)
