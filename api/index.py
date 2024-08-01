@@ -29,6 +29,7 @@ def doDB():
         cursor = connection.cursor()
         cursor.execute("CREATE TABLE IF NOT EXISTS mytest (id INTEGER PRIMARY KEY)")
         cursor.execute("INSERT INTO mytest (id) VALUES (1), (2)")
+        cursor.execute("DROP TABLE IF EXISTS mytest")
         cursor.execute("SELECT * FROM mytest")
         result = cursor.fetchall()
     except pymysql.MySQLError as e:
