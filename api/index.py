@@ -27,7 +27,7 @@ def getDB():
     try:
         connection = get_db_connection()
         cursor = connection.cursor()
-        cursor.execute("SELECT * FROM pledgx")
+        cursor.execute("SELECT * FROM flask")
         result = cursor.fetchall()
     except pymysql.MySQLError as e:
         print(f"MySQL error: {e}")
@@ -51,7 +51,7 @@ def insertDB(file_name, first_name, last_name, phone_number, job_title, country)
         cursor = connection.cursor()
         cursor.execute("DROP TABLE IF EXISTS pledgx")
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS pledgx (
+            CREATE TABLE IF NOT EXISTS flask (
                 id INTEGER AUTO_INCREMENT PRIMARY KEY,
                 file_name VARCHAR(255),
                 first_name VARCHAR(255),
@@ -63,11 +63,11 @@ def insertDB(file_name, first_name, last_name, phone_number, job_title, country)
         """)
         # Insert the data into the table
         cursor.execute("""
-            INSERT INTO pledgx (file_name, first_name, last_name, phone_number, job_title, country)
+            INSERT INTO flask (file_name, first_name, last_name, phone_number, job_title, country)
             VALUES (%s, %s, %s, %s, %s, %s)
         """, (file_name, first_name, last_name, phone_number, job_title, country))
         connection.commit()
-        cursor.execute("SELECT * FROM pledgx")
+        cursor.execute("SELECT * FROM flask")
         result = cursor.fetchall()
     except pymysql.MySQLError as e:
         print(f"MySQL error: {e}")
