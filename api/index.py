@@ -14,10 +14,10 @@ def home():
         result = math(3, 4)
         return jsonify(
             {
-                "testing": {
+                "testing": [
                     os.getenv('TESTING'),
                     result
-                }
+                ]
             }
         )
     else:
