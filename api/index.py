@@ -42,7 +42,7 @@ def getDB():
             connection.close()
     return result
 
-def insertDB(first_name, last_name, phone_number, job_title, country):
+def insertDB(file_name, first_name, last_name, phone_number, job_title, country):
     result = []
     connection = None
     cursor = None
@@ -53,6 +53,7 @@ def insertDB(first_name, last_name, phone_number, job_title, country):
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS pledgx (
                 id INTEGER AUTO_INCREMENT PRIMARY KEY,
+                file_name VARCHAR(255),
                 first_name VARCHAR(255),
                 last_name VARCHAR(255),
                 phone_number VARCHAR(20),
@@ -62,9 +63,9 @@ def insertDB(first_name, last_name, phone_number, job_title, country):
         """)
         # Insert the data into the table
         cursor.execute("""
-            INSERT INTO pledgx (first_name, last_name, phone_number, job_title, country)
-            VALUES (%s, %s, %s, %s, %s)
-        """, (first_name, last_name, phone_number, job_title, country))
+            INSERT INTO pledgx (file_name, first_name, last_name, phone_number, job_title, country)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        """, (file_name, first_name, last_name, phone_number, job_title, country))
         connection.commit()
         cursor.execute("SELECT * FROM pledgx")
         result = cursor.fetchall()
@@ -90,13 +91,14 @@ def home():
 def edit():
     try:
         data = request.json
+        file_name = data.get('fileName')
         first_name = data.get('firstName')
         last_name = data.get('lastName')
         phone_number = data.get('phoneNumber')
         job_title = data.get('jobTitle')
         country = data.get('country')
         
-        result = insertDB(first_name, last_name, phone_number, job_title, country)
+        result = insertDB(file_name, first_name, last_name, phone_number, job_title, country)
         return jsonify({"result": result})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
