@@ -95,8 +95,6 @@ def edit():
         phone_number = data.get('phoneNumber')
         job_title = data.get('jobTitle')
         country = data.get('country')
-        if not all([first_name, last_name, phone_number, job_title, country]):
-            return jsonify({"error": "Missing data"}), 400
         
         result = insertDB(first_name, last_name, phone_number, job_title, country)
         return jsonify({"result": result})
